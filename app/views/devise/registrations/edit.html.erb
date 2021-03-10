@@ -1,0 +1,64 @@
+<div class="container-fluid px-5 mt-5 new-apartment-form">
+<div class="col-md-5 my-5">  
+  <h2>Muuda profiili infot</h2>
+</div>
+
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.error_notification %>
+    <div class="form-inputs">
+    <div class="form-row">
+      <div class="form-group col-md-5 mx-3">
+        <label>Lühikirjeldus</label>
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-5 mx-3">
+        <%= f.input :email, required: true, autofocus: true, label: "Meiliaadress" %>
+      </div>
+    </div>
+    <div class="form-row">
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <p>Palun kinnitage meiliaadress: <%= resource.unconfirmed_email %></p>
+      <% end %>
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-5 mx-3">
+      <%= f.input :password,
+                  hint: "Jäta väli tühjaks, kui ei soovi parooli muuta",
+                  required: false,
+                  label: "Uus parool",
+                  input_html: { autocomplete: "new-password" } %>
+      </div>
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-5 mx-3">
+      <%= f.input :password_confirmation,
+                  required: false,
+                  label: "Uue parooli kinnitus",
+                  input_html: { autocomplete: "new-password" } %>
+      </div>
+    </div>
+    <div class="form-row">
+    <div class="form-group col-md-5 mx-3">
+      <%= f.input :current_password,
+                  hint: "Muudatuste kinnitamiseks on vaja sisestada kehtiv parool",
+                  label: "Kehtiv parool",
+                  required: true,
+                  input_html: { autocomplete: "current-password" } %>
+      </div>
+    </div>
+    </div>
+
+    <div class="form-actions mx-3">
+      <%= f.button :submit, "Muuda konto info", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+<div class="my-5 mx-3">
+
+  <p><%= link_to "Kustuta konto", registration_path(resource_name), data: { confirm: "Olete kindel, et soovite kustutada konto?" }, class: "btn btn-primary", method: :delete %></p>
+
+  <%= link_to "Tagasi", :back %>
+</div>
+</div>
